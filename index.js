@@ -1,6 +1,10 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
 require('./services/passport'); // this ensures the passport file gets executed (even though there's no export)
 // const authRoutes = require('./routes/authRoutes'); // exporting authRoutes to a const
+
+mongoose.connect(keys.mongoURI);
 
 const app = express(); // gets an instance of an express server. Usually you'll only ever need one.
 
