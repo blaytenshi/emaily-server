@@ -14,8 +14,17 @@ passport.use(
         // console.log('access token', accessToken); // like a permission pass (token) to go to google and make requests for information
         // console.log('refresh token', refreshToken); // a pass to refresh the access token because the access token expires after a period of time
         // console.log('profile', profile); // profile data
-        new User({
-            googleId: profile.id // creates a new instance of a user
-        }).save() // saves it to mongodb
+        User.findOne({ googleId: profile.id }) // find the first matching key (googleId) with a given value (profile.id) and return it
+            .then((existingUser) => { // when the promise resolves it will either contain the existing user or it will return null (error first convention)
+                if (existingUser) {
+                    // we already have a record with the given profile ID
+                } else {
+                    // we don't have a user record with this ID, make a new record
+                    new User({
+                        googleId: profile.id // creates a new instance of a user
+                    }).save() // saves it to mongodb
+                }
+            })
+
     })
 ); // creates a new instance of the GoogleStrategy
