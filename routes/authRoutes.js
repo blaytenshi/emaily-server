@@ -13,6 +13,11 @@ module.exports = (app) => { // exporting a function
         passport.authenticate('google')
     );
 
+    app.get('/api/logout', (req, res) => {
+        req.logout(); // logout() is attached to the req object by passport!
+        res.send(req.user); // sends back empty object
+    });
+
     app.get('/api/current_user', (req, res) => {
         res.send(req.user);
     })

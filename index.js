@@ -12,14 +12,14 @@ mongoose.connect(keys.mongoURI);
 const app = express(); // gets an instance of an express server. Usually you'll only ever need one.
 
 app.use(
-    cookieSession({ // cookie session middleware
+    cookieSession({ // cookie session middleware - intercepts the request to express/node and extracts cookie data and passes it onto passport
         maxAge: 30 * 24 * 60 * 60 * 1000, // last for 30 days before cookie expires,
         keys: [keys.cookieKey] // array allows us to put more than one cookie key and the cookieSession library will pick one at random
     })
 );
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); // tells passport to be aware of cookie data passed to it and to run the deserialiseUser(). In the function, the first parameter passed to it is id. It will look for that id.
 
 // authRoutes(app); // sets up routes
 require('./routes/authRoutes')(app); // this line replaces line 6 and line 12. This is currying.
