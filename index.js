@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 const keys = require('./config/keys');
 require('./models/User'); // this needs to be before we require services/passport because we need to load the model before we can use it in services/passport
 require('./services/passport'); // this ensures the passport file gets executed (even though there's no export)
@@ -8,6 +10,16 @@ require('./services/passport'); // this ensures the passport file gets executed 
 mongoose.connect(keys.mongoURI);
 
 const app = express(); // gets an instance of an express server. Usually you'll only ever need one.
+
+app.use(
+    cookieSession({ // cookie session middleware
+        maxAge: 30 * 24 * 60 * 60 * 1000, // last for 30 days before cookie expires,
+        keys: [keys.cookieKey] // array allows us to put more than one cookie key and the cookieSession library will pick one at random
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // authRoutes(app); // sets up routes
 require('./routes/authRoutes')(app); // this line replaces line 6 and line 12. This is currying.
