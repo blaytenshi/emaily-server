@@ -5,6 +5,7 @@ import App from './components/App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
+import 'materialize-css/dist/css/materialize.min.css'; // non-javascript files need their extension
 
 const store = createStore( // creates a new instance of a redux store, takes in three parameters
     reducers,
