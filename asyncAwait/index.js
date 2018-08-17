@@ -8,14 +8,25 @@
 //         .then(json => console.log(json));
 // }
 
-// How to convert to async/await?
-// STEP ONE: Find the function that contains asynchronous code and put async keyword in front of it
-async function fetchAlbums() {
+// // How to convert to async/await?
+// // STEP ONE: Find the function that contains asynchronous code and put async keyword in front of it
+// async function fetchAlbums() {
+//     // STEP TWO: Anything that returns a promise, put await keyword in front of it and assign it to an intermediate variable
+//     const res = await fetch('https://rallycoding.herokuapp.com/api/music_albums');
+//     const json = await res.json();
+//
+//     console.log(json);
+// }
+//
+// fetchAlbums();
+
+// Converting to arrow functions
+const fetchAlbums = async () => {
     // STEP TWO: Anything that returns a promise, put await keyword in front of it and assign it to an intermediate variable
     const res = await fetch('https://rallycoding.herokuapp.com/api/music_albums');
     const json = await res.json();
 
     console.log(json);
-}
+};
 
 fetchAlbums();
