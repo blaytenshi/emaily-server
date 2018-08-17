@@ -10,7 +10,7 @@ const Landing = () => <h2>Landing</h2>
 
 const App = () => {
     return (
-        <div>
+        <div className="container">
             <BrowserRouter>
                 <div>
                     <Header // will now show at all times
