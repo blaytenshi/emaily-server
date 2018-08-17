@@ -22,7 +22,8 @@ passport.use(
     new GoogleStrategy({
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback' // what google will send back the OAuth code on
+        callbackURL: '/auth/google/callback', // what google will send back the OAuth code on, this relative path may cause the app to switch from https to http thereby causing the OAuth flow to break.
+        proxy: true // we need this option to because when Google strategy goes through a proxy, it automatically does NOT trust information coming back from a proxy and thus drops the S from HTTPS.
     }, (accessToken, refreshToken, profile, done) => { // this callback is called by the passport.authenticate() function in /auth/google/callback automatically
         // console.log('access token', accessToken); // like a permission pass (token) to go to google and make requests for information
         // console.log('refresh token', refreshToken); // a pass to refresh the access token because the access token expires after a period of time
