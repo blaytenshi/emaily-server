@@ -13,7 +13,7 @@ mongoose.connect(keys.mongoURI);
 const app = express(); // gets an instance of an express server. Usually you'll only ever need one.
 
 // whenever a request comes to our server and has content in the body, it will be taken and put into the req.body property of the request object.
-app.user(bodyParser.json());
+app.use(bodyParser.json());
 // app.use() accepts objects. They wire up middware inside the express application. Used to modify incoming requests before they're passed to route handlers.
 app.use(
     cookieSession({ // cookie session middleware - intercepts the request to express/node and extracts cookie data and assigns it to req.session property.
