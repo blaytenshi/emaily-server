@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_USER } from './types';
 
-export const fetchUser = () => {
+export const fetchUser = () => async dispatch => { // refactored to use currying
     // What we would usually have without redux thunk:
     // Make the request...
     // const request = axios.get('/api/current_user');
@@ -23,8 +23,7 @@ export const fetchUser = () => {
     // So why do we want to work with redux-thunk right here? well the axios.get is an async
     // function. We have to wait for all the data to come back after the request and THEN
     // dispatch the action with all the data in it.
-    return function(dispatch) {
-        axios.get('/api/current_user')
-            .then(res => dispatch({ type: FETCH_USER, payload: res }));
-    }
-};
+    const res = await axios.get('/api/current_user');
+
+    dispatch({ type: FETCH_USER, payload: res });
+}
