@@ -10,7 +10,10 @@ module.exports = (app) => { // exporting a function
 
     app.get(
         '/auth/google/callback', // when this route is called back by google with the verification token, passport will use it to request data from google can call the callback function we first defined in new GoogleStrategy
-        passport.authenticate('google')
+        passport.authenticate('google'),
+        (req, res) => { // this is a function that be executed after passport.authenticate() is finished
+            res.redirect('/surveys'); // the function tells the browser to redirect the user to "/surveys"
+        }
     );
 
     app.get('/api/logout', (req, res) => {
