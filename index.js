@@ -33,6 +33,7 @@ app.use(passport.session());
 // authRoutes(app); // sets up routes
 require('./routes/authRoutes')(app); // this line replaces line 6 and line 12. This is currying.
 // the way to look at this line is that require, once executed, exports a function. Then we're invoking that function with the 'app' const.
+require('./routes/billingRoutes')(app);
 
 const PORT = process.env.PORT || 5000; // port will be set by your server or default to 5000
 app.listen(PORT);
