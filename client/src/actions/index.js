@@ -25,5 +25,5 @@ export const fetchUser = () => async dispatch => { // refactored to use currying
     // dispatch the action with all the data in it.
     const res = await axios.get('/api/current_user');
 
-    dispatch({ type: FETCH_USER, payload: res });
+    dispatch({ type: FETCH_USER, payload: res.data });
 }
