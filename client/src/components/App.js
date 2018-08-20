@@ -1,6 +1,8 @@
 // Rendering layer control (React Router)
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 import Header from './Header';
 
@@ -14,7 +16,7 @@ class App extends React.Component {
     // replacing componentWillMount... WillMount might be called multiple times. Design changes to
     // React.
     componentDidMount() {
-
+        this.props.fetchUser();
     }
 
     render() {
@@ -34,4 +36,7 @@ class App extends React.Component {
     }
 };
 
-export default App;
+export default connect(
+    null, // reserved for mapStateToProps
+    actions // map dispatch to props?
+)(App);

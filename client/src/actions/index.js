@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_USER } from './types';
 
-const fetchUser = () => {
+export const fetchUser = () => {
     // What we would usually have without redux thunk:
     // Make the request...
     // const request = axios.get('/api/current_user');
