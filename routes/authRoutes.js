@@ -18,7 +18,7 @@ module.exports = (app) => { // exporting a function
 
     app.get('/api/logout', (req, res) => {
         req.logout(); // logout() is attached to the req object by passport!
-        res.send(req.user); // sends back empty object
+        res.redirect('/');
     });
 
     app.get('/api/current_user', (req, res) => {
