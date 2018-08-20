@@ -1,13 +1,9 @@
 const keys = require("../config/keys");
 const stripe = require("stripe")(keys.stripeSecretKey);
+const requireLogin = require("../middlewares/requireLogin");
 
 module.exports = app => {
-    app.post('/api/stripe', async (req, res) => {
-
-        // checks if someone is already logged before executing the rest of the logic!
-        if (!req.user) {
-            return res.status(401).send({ error: 'You must log in!'});
-        }
+    app.post('/api/stripe', requireLogin, async (req, res) => {
 
         // here we will make a request (with the token provided in request) to stripe API to check whether the payment was finalised
         // once it's finalised we will increment the user's email campaign credits
