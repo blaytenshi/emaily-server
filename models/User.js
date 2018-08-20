@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    googleId: String // what piece of data to store and what type it is
+    googleId: String, // what piece of data to store and what type it is
+    credits: { type: Number, default: 0 }
 });
 
 // tells mongoose to create a new collection called users
