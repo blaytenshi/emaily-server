@@ -38,5 +38,23 @@ require('./routes/authRoutes')(app); // this line replaces line 6 and line 12. T
 // the way to look at this line is that require, once executed, exports a function. Then we're invoking that function with the 'app' const.
 require('./routes/billingRoutes')(app);
 
+// this has to be here as it is in matching order (it'll match the routes first then come to this section)
+if (process.env.NODE_ENV === 'production') {
+    // Express will serve up production assets
+    // like our main.js fil, or main.css file!
+    // Express middleware that can detect requests for static content.
+    // The path that is specified tells express which folder on the server
+    // to find the static files to serve up. Here it is our build folder created when we run npm run build
+    app.use(express.static('client/build'));
+
+    // Express will serve up the index.html file
+    // if it doesn't recognise the route
+    // If the middleware (express.static()) can't find anything to send back, it will serve back index.html
+    const path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    })
+}
+
 const PORT = process.env.PORT || 5000; // port will be set by your server or default to 5000
 app.listen(PORT);
