@@ -10,7 +10,7 @@ class Mailer extends helper.Mail {
         super(); // executes any contructor on the Mail class
 
         // sendgrid stuff
-        this.sgApi = sendGrid(keys.sendGridKey);
+        this.sgApi = sendgrid(keys.sendGridKey);
         this.from_email = new helper.Email('no-reply@emaily.com'); // helper.Email is from sendgrid
         this.subject = subject;
         this.body = new helper.Content('text/html', content); // helper.Content is also from sendgrid
@@ -52,7 +52,7 @@ class Mailer extends helper.Mail {
             body: this.toJSON()
         });
 
-        const response = this.sgApi.API(request);
+        const response = await this.sgApi.API(request);
         return response
     }
 }

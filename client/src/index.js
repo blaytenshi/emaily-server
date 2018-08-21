@@ -8,8 +8,8 @@ import reducers from './reducers';
 import 'materialize-css/dist/css/materialize.min.css'; // non-javascript files need their extension
 import reduxThunk from 'redux-thunk';
 
-import axios from 'axios';
-window.axios = axios;
+// import axios from 'axios';
+// window.axios = axios;
 
 // const survey = { title: 'my title', subject: 'my subject', recipients: 'blay.tenshi@gmail.com', body: 'heres the body of the email' };
 // axios.post('/api/surveys', survey);
