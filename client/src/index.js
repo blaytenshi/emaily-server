@@ -12,7 +12,7 @@ import reduxThunk from 'redux-thunk';
 // import axios from 'axios';
 // window.axios = axios;
 
-// const survey = { title: 'my title', subject: 'Give Us Feedback!', recipients: 'blay.tenshi@gmail.com', body: 'We'd love to hear if you enjoyed our services' };
+// const survey = { title: 'my title', subject: 'Give Us Feedback!', recipients: 'blay.tenshi@gmail.com', body: 'We\'d love to hear if you enjoyed our services' };
 // axios.post('/api/surveys', survey);
 
 const store = createStore( // creates a new instance of a redux store, takes in three parameters
