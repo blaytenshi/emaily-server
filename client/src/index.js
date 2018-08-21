@@ -8,10 +8,11 @@ import reducers from './reducers';
 import 'materialize-css/dist/css/materialize.min.css'; // non-javascript files need their extension
 import reduxThunk from 'redux-thunk';
 
+// axios for development testing of hitting /api/surveys endpoint
 // import axios from 'axios';
 // window.axios = axios;
 
-// const survey = { title: 'my title', subject: 'my subject', recipients: 'blay.tenshi@gmail.com', body: 'heres the body of the email' };
+// const survey = { title: 'my title', subject: 'Give Us Feedback!', recipients: 'blay.tenshi@gmail.com', body: 'We'd love to hear if you enjoyed our services' };
 // axios.post('/api/surveys', survey);
 
 const store = createStore( // creates a new instance of a redux store, takes in three parameters
