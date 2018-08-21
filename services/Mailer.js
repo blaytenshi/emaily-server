@@ -16,7 +16,7 @@ class Mailer extends helper.Mail {
         this.recipients = this.formatAddresses(recipients); // formatAddress is a custom function we define ourselves
 
         this.addContent(this.body); // this addContent is from sendgrid. We call this to tell sendgrid that this is the content we want for the body
-        this.addClickTracking(); // our own defined function
+        this.addClickTracking(); // our own defined function required by sendgrid to setup click tracking
         this.addRecipients();
     }
 
@@ -34,6 +34,14 @@ class Mailer extends helper.Mail {
 
         trackingSettings.setClickTracking(clickTracking);
         this.addTrackingSettings(trackingSettings);
+    }
+
+    addRecipients() {
+        const personalize = new helper.Personalization();
+        this.recipients.forEach(recipient => {
+            personalize.addTo(recipient);
+        });
+        this.addPersonalization(personalize);
     }
 }
 
