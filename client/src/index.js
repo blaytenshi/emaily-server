@@ -8,6 +8,12 @@ import reducers from './reducers';
 import 'materialize-css/dist/css/materialize.min.css'; // non-javascript files need their extension
 import reduxThunk from 'redux-thunk';
 
+import axios from 'axios';
+window.axios = axios;
+
+// const survey = { title: 'my title', subject: 'my subject', recipients: 'blay.tenshi@gmail.com', body: 'heres the body of the email' };
+// axios.post('/api/surveys', survey);
+
 const store = createStore( // creates a new instance of a redux store, takes in three parameters
     reducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), // put here so we can inspect the redux state in browser. can remove later.
