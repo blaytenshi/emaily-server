@@ -7,7 +7,11 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
-    app.post('/api/surveys', requireLogin, requireCredits, (req, res) => {
+    app.get('/api/surveys/thanks', (req, res) => {
+        res.send('Thanks for voting!');
+    });
+
+    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
         // these properties come from the body-parser
         const { title, subject, body, recipients } = req.body;
 
@@ -22,8 +26,23 @@ module.exports = app => {
             dateSent: Date.now()
         });
 
-        // send the email!
-        const mailer = new Mailer(survey, surveyTemplate(survey));
-        mailer.send().catch(error => console.log(error));
+        try {
+            // send the email!
+            // create a new Mailer object
+            const mailer = new Mailer(survey, surveyTemplate(survey));
+            // send the mail
+            await mailer.send();
+            // after mailer completes sending, call save on the survey to save to database
+            await survey.save();
+            // deduct a credit from the user object
+            req.user.credits -= 1;
+            // save the user object
+            const user = await req.user.save();
+
+            // by sending back the user object in the response, we're updating all the user credit information, login information, etc
+            res.send(user);
+        } catch (error) {
+            res.status(422).send(error) // 422 is 'Unprocessable entity' or user sent us incorrect data
+        }
     });
 };
