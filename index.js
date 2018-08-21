@@ -38,6 +38,7 @@ app.use(passport.session());
 require('./routes/authRoutes')(app); // this line replaces line 6 and line 12. This is currying.
 // the way to look at this line is that require, once executed, exports a function. Then we're invoking that function with the 'app' const.
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 // this has to be here as it is in matching order (it'll match the routes first then come to this section)
 if (process.env.NODE_ENV === 'production') {
