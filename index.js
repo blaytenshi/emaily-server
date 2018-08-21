@@ -5,6 +5,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 require('./models/User'); // this needs to be before we require services/passport because we need to load the model before we can use it in services/passport
+require('./models/Survey');
 require('./services/passport'); // this ensures the passport file gets executed (even though there's no export)
 // const authRoutes = require('./routes/authRoutes'); // exporting authRoutes to a const
 
